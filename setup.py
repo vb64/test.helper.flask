@@ -21,7 +21,8 @@ setuptools.setup(
     download_url = 'https://github.com/vb64/test.helper.flask/archive/v1.1.tar.gz',
     keywords = ['python', 'Python27', 'flask', 'unittest'],
     classifiers=[
-        "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python",
+        "Framework :: Flask",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
