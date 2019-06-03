@@ -6,8 +6,6 @@ import urllib
 import unittest
 from urlparse import urlparse
 
-from flask import url_for
-
 
 class RequestFactory(object):  # pylint: disable=too-few-public-methods
     """
@@ -42,6 +40,7 @@ class TestFlask(unittest.TestCase):
         generate url for view in app test context
         """
         with self.app.test_request_context():
+            from flask import url_for
             url = url_for(view_name, **kwargs)
 
         return url
