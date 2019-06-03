@@ -1,7 +1,7 @@
 .PHONY: all upload_pip upload_piptest lint flake8 tests setup
 
 ifeq ($(OS),Windows_NT)
-PYTHON = venv\Scripts\python.exe
+PYTHON = venv/Scripts/python.exe
 else
 PYTHON = ./venv/bin/python
 endif
