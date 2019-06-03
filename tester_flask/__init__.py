@@ -2,14 +2,15 @@
 http://flask.pocoo.org/docs/1.0/testing/
 https://cloud.google.com/appengine/docs/standard/python/getting-started/python-standard-env
 """
-import urllib
 import unittest
-from urlparse import urlparse
+try:  # pragma: no cover
+    from urllib import urlencode
+    from urlparse import urlparse
+except ImportError:  # pragma: no cover
+    from urllib.parse import urlparse, urlencode  # pylint: disable=ungrouped-imports
 
-from flask import url_for
 
-
-class RequestFactory(object):  # pylint: disable=too-few-public-methods
+class RequestFactory:  # pylint: disable=too-few-public-methods
     """
     requests generator
     """
@@ -42,6 +43,7 @@ class TestFlask(unittest.TestCase):
         generate url for view in app test context
         """
         with self.app.test_request_context():
+            from flask import url_for
             url = url_for(view_name, **kwargs)
 
         return url
@@ -65,7 +67,7 @@ class TestFlask(unittest.TestCase):
         """
         url = self.get_url(view_name)
         if get_param:
-            url = url + "?" + urllib.urlencode(get_param)
+            url = url + "?" + urlencode(get_param)
         return self.guest_view(url, return_code=return_code, follow_redirects=follow)
 
     def param_view(
@@ -76,7 +78,7 @@ class TestFlask(unittest.TestCase):
         """
         url = self.get_url(view_name, **params)
         if get_param:
-            url = url + "?" + urllib.urlencode(get_param)
+            url = url + "?" + urlencode(get_param)
         return self.guest_view(url, return_code=return_code, follow_redirects=follow)
 
     def simple_post(self, view_name, post_dict, follow=True, content_type=None):
@@ -94,7 +96,7 @@ class TestFlask(unittest.TestCase):
         """
         url = self.get_url(view_name, **params)
         if get_param:
-            url = url + "?" + urllib.urlencode(get_param)
+            url = url + "?" + urlencode(get_param)
         return self.client.post(url, data=post_dict, follow_redirects=follow, content_type=content_type)
 
     def final_url(self, response):
