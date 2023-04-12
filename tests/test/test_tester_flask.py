@@ -10,52 +10,39 @@ class TestSetup(TestFlask):
     """Test SetUp method."""
 
     def setUp(self):  # pylint: disable=arguments-differ
+        """Init with flask app."""
         TestFlask.setUp(self, app)
 
     def test_default(self):
-        """
-        defaults
-        """
+        """Check defaults."""
         self.assertTrue(self.client)
         self.assertTrue(self.factory)
 
     def test_simple_view(self):
-        """
-        simple_view
-        """
+        """Check simple_view."""
         self.assertEqual(self.simple_view('main_page').status_code, 200)
         self.assertEqual(self.simple_view('main_page', get_param={'hello': 1}).status_code, 200)
 
     def test_param_view(self):
-        """
-        param_view
-        """
+        """Check param_view."""
         self.assertEqual(self.param_view('main_page', {'one': 1}).status_code, 200)
         self.assertEqual(self.param_view('main_page', {'one': 1}, get_param={'hello': 1}).status_code, 200)
 
     def test_simple_post(self):
-        """
-        simple_post
-        """
+        """Check simple_post."""
         self.assertEqual(self.simple_post('main_page', {'one': 1}).status_code, 200)
 
     def test_param_post(self):
-        """
-        param_post
-        """
+        """Check param_post."""
         self.assertEqual(self.param_post('main_page', {'hello': 1}, {'one': 1}).status_code, 200)
         self.assertEqual(self.param_post('main_page', {'hello': 1}, {'one': 1}, get_param={'hi': 1}).status_code, 200)
 
     def test_redirect(self):
-        """
-        redirect
-        """
+        """Check redirect."""
         response = self.simple_post('redirect_page', {'one': 1}, follow=False)
         self.assertEqual(self.final_url(response), self.get_url('main_page'))
 
     def test_factory(self):
-        """
-        factory
-        """
+        """Check factory."""
         response = self.factory.post(self.get_url('redirect_page'))
         self.assertTrue(response)

@@ -15,6 +15,7 @@ TESTS = tests
 
 PYLINT = $(PYTHON) -m pylint
 FLAKE8 = $(PYTHON) -m flake8
+PEP257 = $(PYTHON) -m pep257
 PYTEST = $(PTEST) --cov=$(SOURCE) --cov-report term:skip-covered
 PIP = $(PYTHON) -m pip install
 
@@ -28,7 +29,11 @@ lint:
 	$(PYLINT) $(TESTS)/test
 	$(PYLINT) $(SOURCE)
 
-tests:
+pep257:
+	$(PEP257) --match='.*\.py' $(TESTS)/test
+	$(PEP257) $(SOURCE)
+
+tests: flake8 pep257 lint
 	$(PYTEST) --durations=5 $(TESTS)
 	$(COVERAGE) html --skip-covered
 
