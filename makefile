@@ -46,6 +46,15 @@ tests: flake8 pep257 lint
 	$(PYTEST) --durations=5 $(TESTS)
 	$(COVERAGE) html --skip-covered
 
+package:
+	$(PYTHON) -m build -n
+
+pypitest: package
+	$(PYTHON) -m twine upload --config-file .pypirc --repository testpypi dist/*
+
+pypi: package
+	$(PYTHON) -m twine upload --config-file .pypirc dist/*
+
 setup: setup_python setup_pip
 
 setup2: setup_python2 setup_pip2
