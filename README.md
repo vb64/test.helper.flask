@@ -50,20 +50,16 @@ git clone git@github.com:vb64/test.helper.flask.git
 cd test.helper.flask
 ```
 
-With Python 2
-
-```bash
-make setup2 PYTHON_BIN="/path/to/python2
-```
-
 With Python 3
 
 ```bash
 make setup PYTHON_BIN="/path/to/python3
+make tests
 ```
 
-Then
+With Python 2
 
 ```bash
-make tests
+make setup2 PYTHON_BIN="/path/to/python2
+make tests2
 ```
