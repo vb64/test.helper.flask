@@ -1,4 +1,5 @@
 # Class for autotests flask python apps
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/7b91398bad9f4f3db99b727f3b225d6b)](https://app.codacy.com/gh/vb64/test.helper.flask/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 ## Install
 ```bash
