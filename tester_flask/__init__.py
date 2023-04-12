@@ -46,10 +46,8 @@ class TestFlask(unittest.TestCase):
         """Generic get request."""
         response = self.client.get(url, follow_redirects=follow_redirects)
 
-        self.assertEqual(
-          response.status_code,
-          return_code,
-          "guest_view {}: {} -> {}".format(return_code, url, response.status_code)
+        assert response.status_code == return_code, "guest_view {}: {} -> {}".format(
+          return_code, url, response.status_code
         )
         return response
 

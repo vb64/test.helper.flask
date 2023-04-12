@@ -15,34 +15,34 @@ class TestSetup(TestFlask):
 
     def test_default(self):
         """Check defaults."""
-        self.assertTrue(self.client)
-        self.assertTrue(self.factory)
+        assert self.client
+        assert self.factory
 
     def test_simple_view(self):
         """Check simple_view."""
-        self.assertEqual(self.simple_view('main_page').status_code, 200)
-        self.assertEqual(self.simple_view('main_page', get_param={'hello': 1}).status_code, 200)
+        assert self.simple_view('main_page').status_code == 200
+        assert self.simple_view('main_page', get_param={'hello': 1}).status_code == 200
 
     def test_param_view(self):
         """Check param_view."""
-        self.assertEqual(self.param_view('main_page', {'one': 1}).status_code, 200)
-        self.assertEqual(self.param_view('main_page', {'one': 1}, get_param={'hello': 1}).status_code, 200)
+        assert self.param_view('main_page', {'one': 1}).status_code == 200
+        assert self.param_view('main_page', {'one': 1}, get_param={'hello': 1}).status_code == 200
 
     def test_simple_post(self):
         """Check simple_post."""
-        self.assertEqual(self.simple_post('main_page', {'one': 1}).status_code, 200)
+        assert self.simple_post('main_page', {'one': 1}).status_code == 200
 
     def test_param_post(self):
         """Check param_post."""
-        self.assertEqual(self.param_post('main_page', {'hello': 1}, {'one': 1}).status_code, 200)
-        self.assertEqual(self.param_post('main_page', {'hello': 1}, {'one': 1}, get_param={'hi': 1}).status_code, 200)
+        assert self.param_post('main_page', {'hello': 1}, {'one': 1}).status_code == 200
+        assert self.param_post('main_page', {'hello': 1}, {'one': 1}, get_param={'hi': 1}).status_code == 200
 
     def test_redirect(self):
         """Check redirect."""
         response = self.simple_post('redirect_page', {'one': 1}, follow=False)
-        self.assertEqual(self.final_url(response), self.get_url('main_page'))
+        assert self.final_url(response) == self.get_url('main_page')
 
     def test_factory(self):
         """Check factory."""
         response = self.factory.post(self.get_url('redirect_page'))
-        self.assertTrue(response)
+        assert response
