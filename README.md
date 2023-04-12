@@ -1,7 +1,7 @@
 # Class for autotests flask python apps
 
 ## Install
-```
+```bash
 $ pip install tester_flask
 ```
 
@@ -25,18 +25,16 @@ def redirect_page():
 
 
 class TestFlaskApp(TestFlask):
-    """
-    test flask app
-    """
+
     def setUp(self):
         TestFlask.setUp(self, app)
 
     def test_app(self):
-        self.assertEqual(self.simple_view('main_page').status_code, 200)
-        self.assertEqual(self.param_post('main_page', {'hello': 1}, {'one': 1}).status_code, 200)
+        assert self.simple_view('main_page').status_code == 200
+        assert self.param_post('main_page', {'hello': 1}, {'one': 1}).status_code == 200
 
         response = self.simple_post('redirect_page', {'one': 1}, follow=False)
-        self.assertEqual(self.final_url(response), self.get_url('main_page'))
+        assert self.final_url(response) == self.get_url('main_page')
 
 ```
 
