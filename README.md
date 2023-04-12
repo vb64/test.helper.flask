@@ -1,4 +1,8 @@
 # Class for autotests flask python apps
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/vb64/test.helper.flask/pep257.yml?label=Pep257&style=plastic&branch=main)](https://github.com/vb64/test.helper.flask/actions?query=workflow%3Apep257)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/vb64/test.helper.flask/py2.yml?label=Python%202.7&style=plastic&branch=main)](https://github.com/vb64/test.helper.flask/actions?query=workflow%3Apy2)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/vb64/test.helper.flask/py3.yml?label=Python%203.7-3.10&style=plastic&branch=main)](https://github.com/vb64/test.helper.flask/actions?query=workflow%3Apy3)
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/7b91398bad9f4f3db99b727f3b225d6b)](https://app.codacy.com/gh/vb64/test.helper.flask/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/7b91398bad9f4f3db99b727f3b225d6b)](https://app.codacy.com/gh/vb64/test.helper.flask/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 ## Install
