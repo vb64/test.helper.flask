@@ -3,7 +3,7 @@
 
 ## Install
 ```bash
-$ pip install tester_flask
+pip install tester_flask
 ```
 
 ## Usage in tests
@@ -40,22 +40,26 @@ class TestFlaskApp(TestFlask):
 ```
 
 ## Development
-```
-$ git clone git@github.com:vb64/test.helper.flask.git
-$ cd test.helper.flask
+
+```bash
+git clone git@github.com:vb64/test.helper.flask.git
+cd test.helper.flask
 ```
 
-With Python 2.7
-```
-$ make setup PYTHON_BIN="/path/to/python2.7 -m virtualenv"
+With Python 2
+
+```bash
+make setup2 PYTHON_BIN="/path/to/python2
 ```
 
 With Python 3
-```
-$ make setup PYTHON_BIN="/path/to/python3.7 -m venv"
+
+```bash
+make setup PYTHON_BIN="/path/to/python3
 ```
 
 Then
-```
-$ make tests
+
+```bash
+make tests
 ```
