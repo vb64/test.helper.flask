@@ -14,6 +14,7 @@ SOURCE = tester_flask
 TESTS = tests
 
 PYLINT = $(PYTHON) -m pylint
+PYLINT2 = $(PYLINT) --rcfile .pylintrc2
 FLAKE8 = $(PYTHON) -m flake8
 PEP257 = $(PYTHON) -m pep257
 PYTEST = $(PTEST) --cov=$(SOURCE) --cov-report term:skip-covered
@@ -29,9 +30,17 @@ lint:
 	$(PYLINT) $(TESTS)/test
 	$(PYLINT) $(SOURCE)
 
+lint2:
+	$(PYLINT2) $(TESTS)/test
+	$(PYLINT2) $(SOURCE)
+
 pep257:
 	$(PEP257) --match='.*\.py' $(TESTS)/test
 	$(PEP257) $(SOURCE)
+
+tests2: flake8 pep257 lint2
+	$(PYTEST) --durations=5 $(TESTS)
+	$(COVERAGE) html --skip-covered
 
 tests: flake8 pep257 lint
 	$(PYTEST) --durations=5 $(TESTS)
@@ -39,12 +48,17 @@ tests: flake8 pep257 lint
 
 setup: setup_python setup_pip
 
-setup2: setup_python2 setup_pip
+setup2: setup_python2 setup_pip2
 
 setup_pip:
 	$(PIP) --upgrade pip
 	$(PIP) -r requirements.txt
 	$(PIP) -r deploy.txt
+	$(PIP) -r $(TESTS)/requirements.txt
+
+setup_pip2:
+	$(PIP) --upgrade pip
+	$(PIP) -r requirements2.txt
 	$(PIP) -r $(TESTS)/requirements.txt
 
 setup_python:

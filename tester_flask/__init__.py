@@ -81,7 +81,8 @@ class TestFlask(unittest.TestCase):
             url = url + "?" + urlencode(get_param)
         return self.client.post(url, data=post_dict, follow_redirects=follow, content_type=content_type)
 
-    def final_url(self, response):
+    @staticmethod
+    def final_url(response):
         """Return final url after redirect."""
         assert response.status_code == 302
         return urlparse(response.location).path
