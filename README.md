@@ -1,9 +1,5 @@
 # Class for autotests flask python apps
 
-[![Python 2.7.14 3.6.3 3.7](https://img.shields.io/travis/vb64/test.helper.flask.svg?label=Python%202.7%203.6%203.7&style=plastic)](https://travis-ci.org/vb64/test.helper.flask)
-[![Code Climate](https://img.shields.io/codeclimate/maintainability-percentage/vb64/test.helper.flask.svg?label=Code%20Climate&style=plastic)](https://codeclimate.com/github/vb64/test.helper.flask)
-[![Coverage Status](https://coveralls.io/repos/github/vb64/test.helper.flask/badge.svg?branch=master)](https://coveralls.io/github/vb64/test.helper.flask?branch=master)
-
 ## Install
 ```
 $ pip install tester_flask

@@ -1,16 +1,15 @@
-"""
+"""Package tester_flask.
+
 make test T=test_tester_flask
 """
-import os
 from tester_flask import TestFlask
 from tests.flask_app import app
 
 
 class TestSetup(TestFlask):
-    """
-    Test SetUp method
-    """
-    def setUp(self):
+    """Test SetUp method."""
+
+    def setUp(self):  # pylint: disable=arguments-differ
         TestFlask.setUp(self, app)
 
     def test_default(self):

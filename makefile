@@ -1,54 +1,50 @@
-.PHONY: all upload_pip upload_piptest lint flake8 tests setup
+.PHONY: all lint flake8 tests setup
 
 ifeq ($(OS),Windows_NT)
 PYTHON = venv/Scripts/python.exe
+COVERAGE = venv/Scripts/coverage.exe
+PTEST = venv/Scripts/pytest.exe
 else
 PYTHON = ./venv/bin/python
+COVERAGE = ./venv/bin/coverage
+PTEST = ./venv/bin/pytest
 endif
 
 SOURCE = tester_flask
-TEST = tests
-COVERAGE = $(PYTHON) -m coverage
-TESTS = $(TEST)/run_tests.py
+TESTS = tests
+
+PYLINT = $(PYTHON) -m pylint
+FLAKE8 = $(PYTHON) -m flake8
+PYTEST = $(PTEST) --cov=$(SOURCE) --cov-report term:skip-covered
+PIP = $(PYTHON) -m pip install
 
 all: tests
 
-tests: flake8 lint coverage html
-	$(COVERAGE) report --skip-covered
-
-test:
-	$(PYTHON) $(TESTS) test.$(T)
-
 flake8:
-	$(PYTHON) -m flake8 --max-line-length=110 $(SOURCE)
+	$(FLAKE8) $(SOURCE)
+	$(FLAKE8) $(TESTS)/test
 
 lint:
-	$(PYTHON) -m pylint $(SOURCE)
+	$(PYLINT) $(TESTS)/test
+	$(PYLINT) $(SOURCE)
 
-verbose:
-	$(PYTHON) $(TESTS) verbose
-
-coverage:
-	$(COVERAGE) run $(TESTS)
-
-html:
+tests:
+	$(PYTEST) --durations=5 $(TESTS)
 	$(COVERAGE) html --skip-covered
-
-dist:
-	$(PYTHON) setup.py sdist bdist_wheel
-
-upload_piptest: tests dist
-	$(PYTHON) -m twine upload --repository-url https://test.pypi.org/legacy/ dist/*
-
-upload_pip: tests dist
-	$(PYTHON) -m twine upload dist/*
 
 setup: setup_python setup_pip
 
+setup2: setup_python2 setup_pip
+
 setup_pip:
-	$(PYTHON) -m pip install --upgrade pip
-	$(PYTHON) -m pip install -r requirements.txt
-	$(PYTHON) -m pip install -r $(TEST)/requirements.txt
+	$(PIP) --upgrade pip
+	$(PIP) -r requirements.txt
+	$(PIP) -r deploy.txt
+	$(PIP) -r $(TESTS)/requirements.txt
 
 setup_python:
-	$(PYTHON_BIN) ./venv
+	$(PYTHON_BIN) -m venv ./venv
+
+setup_python2:
+	$(PYTHON_BIN) -m pip install virtualenv
+	$(PYTHON_BIN) -m virtualenv ./venv
