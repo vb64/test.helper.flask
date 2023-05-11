@@ -26,9 +26,12 @@ class RequestFactory:  # pylint: disable=too-few-public-methods
 class TestFlask(unittest.TestCase):
     """Flask apps tester."""
 
-    def setUp(self, app):  # pylint: disable=arguments-differ
+    app = None
+    client = None
+    factory = None
+
+    def set_up(self, app):
         """Set defaults for Flask testing."""
-        unittest.TestCase.setUp(self)
         self.app = app
         self.app.config['TESTING'] = True
         self.client = self.app.test_client()
