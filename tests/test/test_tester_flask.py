@@ -9,9 +9,10 @@ from tests.flask_app import app
 class TestSetup(TestFlask):
     """Test SetUp method."""
 
-    def setUp(self):  # pylint: disable=arguments-differ
+    def setUp(self):
         """Init with flask app."""
-        TestFlask.setUp(self, app)
+        super(TestSetup, self).setUp()
+        TestFlask.set_up(self, app)
 
     def test_default(self):
         """Check defaults."""
