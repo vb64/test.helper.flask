@@ -46,7 +46,7 @@ class TestFlask(unittest.TestCase):
         return url
 
     def guest_view(self, url, return_code=200, follow_redirects=False):
-        """Generic get request."""
+        """Make generic get request."""
         response = self.client.get(url, follow_redirects=follow_redirects)
 
         assert response.status_code == return_code, "guest_view {}: {} -> {}".format(
@@ -55,7 +55,7 @@ class TestFlask(unittest.TestCase):
         return response
 
     def simple_view(self, view_name, return_code=200, follow=False, get_param=None):
-        """Simple get request."""
+        """Make simple get request."""
         url = self.get_url(view_name)
         if get_param:
             url = url + "?" + urlencode(get_param)
@@ -63,7 +63,7 @@ class TestFlask(unittest.TestCase):
 
     def param_view(
       self, view_name, params, return_code=200, follow=False, get_param=None
-    ):  # pylint: disable=too-many-arguments
+    ):
         """Get request with parameters."""
         url = self.get_url(view_name, **params)
         if get_param:
@@ -71,7 +71,7 @@ class TestFlask(unittest.TestCase):
         return self.guest_view(url, return_code=return_code, follow_redirects=follow)
 
     def simple_post(self, view_name, post_dict, follow=True, content_type=None):
-        """Simple post request."""
+        """Make simple post request."""
         url = self.get_url(view_name)
         return self.client.post(url, data=post_dict, follow_redirects=follow, content_type=content_type)
 
