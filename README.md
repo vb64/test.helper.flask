@@ -32,7 +32,8 @@ def redirect_page():
 class TestFlaskApp(TestFlask):
 
     def setUp(self):
-        TestFlask.setUp(self, app)
+        super(TestFlaskApp, self).setUp()
+        TestFlask.set_up(self, app)
 
     def test_app(self):
         assert self.simple_view('main_page').status_code == 200
